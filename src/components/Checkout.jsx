@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 import { ArrowLeft, CreditCard, Truck, Shield, Check } from 'lucide-react';
-import { CartItem, CheckoutForm } from '../types';
 import { formatCurrency } from '../utils/currency';
 
-interface CheckoutProps {
-  isOpen: boolean;
-  onClose: () => void;
-  items: CartItem[];
-  onOrderComplete: () => void;
-}
-
-const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, items, onOrderComplete }) => {
+const Checkout = ({ isOpen, onClose, items, onOrderComplete }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [isProcessing, setIsProcessing] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
   
-  const [formData, setFormData] = useState<CheckoutForm>({
+  const [formData, setFormData] = useState({
     email: '',
     firstName: '',
     lastName: '',
@@ -34,7 +26,7 @@ const Checkout: React.FC<CheckoutProps> = ({ isOpen, onClose, items, onOrderComp
   const tax = totalPrice * 0.08;
   const finalTotal = totalPrice + shipping + tax;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };

@@ -1,14 +1,7 @@
 import React from 'react';
 import { Search, ShoppingBag, User, Menu, Heart } from 'lucide-react';
 
-interface HeaderProps {
-  cartItemCount: number;
-  onCartClick: () => void;
-  searchQuery: string;
-  onSearchChange: (query: string) => void;
-}
-
-const Header: React.FC<HeaderProps> = ({
+const Header = ({
   cartItemCount,
   onCartClick,
   searchQuery,

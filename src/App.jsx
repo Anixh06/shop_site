@@ -5,14 +5,13 @@ import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import { products } from './data/products';
 import { useCart } from './hooks/useCart';
-import { ViewMode, SortOption } from './types';
 import { ToastProvider, useToast } from './components/Toast';
 
 function AppContent() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [viewMode, setViewMode] = useState<ViewMode>('grid');
-  const [sortBy, setSortBy] = useState<SortOption>('name');
+  const [viewMode, setViewMode] = useState('grid');
+  const [sortBy, setSortBy] = useState('name');
   const [showCheckout, setShowCheckout] = useState(false);
 
   const cart = useCart();
@@ -62,12 +61,12 @@ function AppContent() {
     addToast('Order completed successfully!', 'success');
   };
 
-  const handleAddToCart = (product: typeof products[0]) => {
+  const handleAddToCart = (product) => {
     cart.addItem(product);
     addToast(`${product.name} added to cart`, 'success');
   };
 
-  const handleRemoveItem = (id: string, color?: string, size?: string) => {
+  const handleRemoveItem = (id, color, size) => {
     cart.removeItem(id, color, size);
     addToast('Item removed from cart', 'info');
   };

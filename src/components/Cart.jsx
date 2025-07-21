@@ -1,18 +1,8 @@
 import React from 'react';
 import { X, Plus, Minus, ShoppingBag, Trash2 } from 'lucide-react';
-import { CartItem } from '../types';
 import { formatCurrency } from '../utils/currency';
 
-interface CartProps {
-  isOpen: boolean;
-  onClose: () => void;
-  items: CartItem[];
-  onUpdateQuantity: (id: string, quantity: number, color?: string, size?: string) => void;
-  onRemoveItem: (id: string, color?: string, size?: string) => void;
-  onCheckout: () => void;
-}
-
-const Cart: React.FC<CartProps> = ({
+const Cart = ({
   isOpen,
   onClose,
   items,

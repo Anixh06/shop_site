@@ -1,33 +1,21 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-interface Toast {
-  id: number;
-  message: string;
-  type: 'success' | 'error' | 'info';
-}
+const ToastContext = createContext(undefined);
 
-interface ToastContextType {
-  toasts: Toast[];
-  addToast: (message: string, type?: 'success' | 'error' | 'info') => void;
-  removeToast: (id: number) => void;
-}
+export const ToastProvider = ({ children }) => {
+  const [toasts, setToasts] = useState([]);
 
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
-
-export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [toasts, setToasts] = useState<Toast[]>([]);
-
-  const addToast = (message: string, type: 'success' | 'error' | 'info' = 'info') => {
+  const addToast = (message, type = 'info') => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => removeToast(id), 3000);
   };
 
-  const removeToast = (id: number) => {
+  const removeToast = (id) => {
     setToasts((prev) => prev.filter((toast) => toast.id !== id));
   };
 
-  const getToastBgColor = (type: 'success' | 'error' | 'info') => {
+  const getToastBgColor = (type) => {
     switch (type) {
       case 'success':
         return 'bg-green-500';
@@ -56,7 +44,7 @@ export const ToastProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   );
 };
 
-export const useToast = (): ToastContextType => {
+export const useToast = () => {
   const context = useContext(ToastContext);
   if (!context) {
     throw new Error('useToast must be used within a ToastProvider');

@@ -1,5 +1,3 @@
-import { Product } from '../types';
-
 export const categories = [
   'All',
   'Electronics',
@@ -10,7 +8,7 @@ export const categories = [
   'Books'
 ];
 
-export const products: Product[] = [
+export const products = [
   {
     id: '1',
     name: 'Wireless Bluetooth Headphones',
